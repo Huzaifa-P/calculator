@@ -5,9 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="#">
     <title>Calculator</title>
 </head>
 <body>
+    <h1>Calculator</h1>
+    <div class="content">
+        <div class="container">
+            <div class="prev-display"></div>
+            <div class="current-display">0</div>
+            <div class="keypad-1">
+                <button class="clear">Clear</button>
+                <button class="delete">Delete</button>
+            </div>
+            <div class="keypad">
+                <input type="button" class="numbers" id="num7" value="7">
+                <input type="button" class="numbers" id="num8" value="8">
+                <input type="button" class="numbers" id="num9" value="9">
+                <button class="operators" value="division">&#247</button>
+
+                <input type="button" class="numbers" id="num4" value="4">  
+                <input type="button" class="numbers" id="num5" value="5">  
+                <input type="button" class="numbers" id="num6" value="6">
+                <button class="operators" value="multiplication">&#215</button>
+    
+                <input type="button" class="numbers" id="num1" value="1">
+                <input type="button" class="numbers" id="num2" value="2">
+                <input type="button" class="numbers" id="num3" value="3">
+                <button class="operators" value="subtraction">&#8722</button>
+                
+                <input type="button" class="numbers" id="numDec" value=".">
+                <input type="button" class="numbers" id="num0" value="0">
+                <button class="equals">&#61</button>
+                <button class="operators" value="addition">&#43</button>
+            </div>
+        </div>
+    </div>
     
     <script src="script.js"></script>
 </body>

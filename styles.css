@@ -1,0 +1,79 @@
+body {
+    text-align: center;
+}
+.prev-display {
+    width: 287px;
+    height: 40px;
+    background-color: white;
+    border-radius: 2px;
+    border: medium solid black;
+    border-width: 1px;
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.current-display { 
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+    width: 282px;
+    height: 40px;
+    background-color: white;
+    border-radius: 2px;
+    border: medium solid black;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-width: 1px;
+    margin-bottom: 5px;
+    padding-right: 5px;
+    font-size: 25px;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: 70px 70px 70px 70px;
+    grid-template-rows: 50px 50px 50px 50px;
+    gap: 3px;
+}
+
+.keypad input[type="button"], button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.keypad input[class="numbers"] {
+    font-weight: 550;
+}
+
+.keypad-1 {
+    display: grid;
+    grid-template-columns: 143px 143px;
+    gap: 3px;
+    margin-bottom: 3px;
+}
+
+.keypad-1 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 288px;
+    background-color: grey;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
