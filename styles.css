@@ -1,8 +1,13 @@
 body {
-    text-align: center;
+    text-align: center; 
+    font-family: Verdana, sans-serif;                            
 }
+
 .prev-display {
-    width: 287px;
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
+    width: 282px;
     height: 40px;
     background-color: white;
     border-radius: 2px;
@@ -11,6 +16,9 @@ body {
     border-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    padding-right: 5px;
+    font-size: 12px;
+    color: grey;
 }
 
 .current-display { 
@@ -28,7 +36,7 @@ body {
     border-width: 1px;
     margin-bottom: 5px;
     padding-right: 5px;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .keypad {
@@ -52,6 +60,7 @@ body {
 .keypad-1 {
     display: grid;
     grid-template-columns: 143px 143px;
+    grid-template-rows: 50px;
     gap: 3px;
     margin-bottom: 3px;
 }
@@ -67,7 +76,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 288px;
-    background-color: grey;
+    background-color: rgb(0, 81, 84);
     padding: 10px;
     border-radius: 10px;
 }
