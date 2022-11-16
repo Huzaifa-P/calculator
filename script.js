@@ -1,25 +1,34 @@
 // calculator functions
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
 function addition(num1, num2) {
-    return num1 + num2;
+    let ans = num1 + num2;
+    return round(ans, 6);
 }
 
 function subtraction(num1, num2) {
-    return num1 - num2;
+    let ans = num1 - num2;
+    return round(ans, 6);
 }
 
 function multiplication(num1, num2) {
-    return num1 * num2;
+    let ans = num1 * num2;
+    return round(ans, 6);
 }
 
 function division(num1, num2) {
-    return num1 / num2;
+    let ans = num1 / num2;
+    return round(ans, 6);
 }
 
 function operate(num1, num2, func) {
     return window[func](num1, num2);
 }
 
-
+console.log(/[.]/.test('025'))
 // DOM JS
 const currDisplay = document.querySelector('.current-display');
 const prevDisplay = document.querySelector('.prev-display');
@@ -28,6 +37,11 @@ const deleteNum = document.querySelector('.delete');
 const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operators');
 const equals = document.querySelector('.equals');
+
+function hasDecimal(num) {
+    if (num % 1 !== 0) return true;
+    return false;
+}
 
 let displayVal = '';
 let prevDisplayVal = '';
@@ -56,22 +70,24 @@ numbers.forEach(num => num.addEventListener('click', () => {
     if (currDisplay.textContent === '0' && num.value != '.') {
         currDisplay.textContent = '';
     }
-    if (displayVal.length < 13) {
+    if (currDisplay.textContent.length < 13 && num.value != '.') {
         currDisplay.textContent += num.value;
+    }
+    if (num.value === '.' && !(/[.]/.test(currDisplay.textContent))) {
+        currDisplay.textContent += num.value
     }
 }));
 
 operators.forEach(op => op.addEventListener('click', () => {
     if (isNewNum && secondNum === false) {
         num2 = parseFloat(currDisplay.textContent);
-        num1 = operate(num1, num2, currOperation);
-        currDisplay.textContent = num1;
+        currDisplay.textContent = operate(num1, num2, currOperation);
+        num1 = currDisplay.textContent;
         isNewNum = false;
     }
     num1 = parseFloat(currDisplay.textContent);
     currOperation = op.value;
     prevDisplay.innerHTML = num1 + setOperation(currOperation);
-    console.log(currOperation);
     secondNum = true;
     isNewNum = true;
     isEquals = false;
