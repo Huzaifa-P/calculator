@@ -76,6 +76,9 @@ numbers.forEach(num => num.addEventListener('click', () => {
     if (num.value === '.' && !(/[.]/.test(currDisplay.textContent))) {
         currDisplay.textContent += num.value
     }
+    if (currDisplay.textContent === '.') {
+        currDisplay.textContent = '0.';
+    }
 }));
 
 operators.forEach(op => op.addEventListener('click', () => {
@@ -117,6 +120,10 @@ clear.addEventListener('click', () => {
 
 deleteNum.addEventListener('click', () => {
     console.log(isNewNum, secondNum, isEquals);
-    if (isNewNum === false && secondNum === false && isEquals === false)
-    currDisplay.textContent = currDisplay.textContent.substring(0, currDisplay.textContent.length - 1);
+    if (secondNum === false && isEquals === false) {
+            currDisplay.textContent = currDisplay.textContent.substring(0, currDisplay.textContent.length - 1);
+    }
+    if (currDisplay.textContent === '') {
+        currDisplay.textContent += '0';
+    }
 });
