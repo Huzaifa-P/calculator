@@ -49,8 +49,9 @@ function clearContent(str) {
     prevDisplayVal = '';
     num1 = 0;
     num2 = 0;
-    currDisplay.textContent = str;
+    currDisplay.textContent = '0';
     prevDisplay.textContent = '';
+    window.alert(str);
 }
 
 function division(n1, n2) {
@@ -102,6 +103,9 @@ operators.forEach(op => op.addEventListener('click', () => {
         isNewNum = false;
     }
     num1 = parseFloat(currDisplay.textContent);
+    if (num2 === 0 && currOperation === 'division'){
+        clearContent(`silly billy you can't divide by 0`);
+    }
     currOperation = op.value;
     prevDisplay.innerHTML = num1 + setOperation(currOperation);
     secondNum = true;
@@ -121,7 +125,14 @@ equals.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    clearContent('0');
+    secondNum = false;
+    isEquals = false;
+    isNewNum = false;
+    prevDisplayVal = '';
+    num1 = 0;
+    num2 = 0;
+    currDisplay.textContent = '0';
+    prevDisplay.textContent = '';
 });
 
 deleteNum.addEventListener('click', () => {
