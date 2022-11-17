@@ -1,35 +1,3 @@
-// calculator functions
-
-function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-}
-
-function addition(num1, num2) {
-    let ans = num1 + num2;
-    return round(ans, 6);
-}
-
-function subtraction(num1, num2) {
-    let ans = num1 - num2;
-    return round(ans, 6);
-}
-
-function multiplication(num1, num2) {
-    let ans = num1 * num2;
-    return round(ans, 6);
-}
-
-function division(num1, num2) {
-    let ans = num1 / num2;
-    return round(ans, 6);
-}
-
-function operate(num1, num2, func) {
-    return window[func](num1, num2);
-}
-
-console.log(/[.]/.test('025'))
-// DOM JS
 const currDisplay = document.querySelector('.current-display');
 const prevDisplay = document.querySelector('.prev-display');
 const clear = document.querySelector('.clear');
@@ -51,6 +19,55 @@ let num2;
 let currOperation = '';
 let prevOperation = '';
 
+let secondNum = false;
+let isNewNum = false;
+let isEquals = false;
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function addition(n1, n2) {
+    let ans = n1 + n2;
+    return round(ans, 6);
+}
+
+function subtraction(n1, n2) {
+    let ans = n1 - n2;
+    return round(ans, 6);
+}
+
+function multiplication(n1, n2) {
+    let ans = n1 * n2;
+    return round(ans, 6);
+}
+
+function clearContent(str) {
+    secondNum = false;
+    isEquals = false;
+    isNewNum = false;
+    prevDisplayVal = '';
+    num1 = 0;
+    num2 = 0;
+    currDisplay.textContent = str;
+    prevDisplay.textContent = '';
+}
+
+function division(n1, n2) {
+    console.log(n1, n2)
+    if (n2 === 0) {
+        clearContent(`silly billy you can't divide by 0`);
+    }
+    else {
+        let ans = n1 / n2;
+        return round(ans, 6);
+    }
+}
+
+function operate(num1, num2, func) {
+    return window[func](num1, num2);
+}
+
 let setOperation = (opVal) => {
     if (opVal === 'addition') return ' &#43 ';
     if (opVal === 'subtraction') return ' &#8722 ';
@@ -58,16 +75,12 @@ let setOperation = (opVal) => {
     if (opVal === 'division') return ' &#247 ';
 }
 
-let secondNum = false;
-let isNewNum = false;
-let isEquals = false;
-
 numbers.forEach(num => num.addEventListener('click', () => {
     if (secondNum === true) {
         currDisplay.textContent = '';
         secondNum = false;
     }
-    if (currDisplay.textContent === '0' && num.value != '.') {
+    if ((currDisplay.textContent === '0' || currDisplay.textContent === `silly billy you can't divide by 0` || currDisplay.textContent === `please use operator`) && num.value != '.') {
         currDisplay.textContent = '';
     }
     if (currDisplay.textContent.length < 13 && num.value != '.') {
@@ -97,7 +110,7 @@ operators.forEach(op => op.addEventListener('click', () => {
 }));
 
 equals.addEventListener('click', () => {
-    if (isEquals === false) {
+    if (isEquals === false && currOperation !== '') {
         num2 = parseFloat(currDisplay.textContent);
         currDisplay.textContent = operate(num1, num2, currOperation);
         prevDisplay.innerHTML = num1 + setOperation(currOperation) + num2 + ' = ';
@@ -108,18 +121,10 @@ equals.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    secondNum = false;
-    isEquals = false;
-    isNewNum = false;
-    prevDisplayVal = '';
-    num1 = 0;
-    num2 = 0;
-    currDisplay.textContent = '0';
-    prevDisplay.textContent = '';
+    clearContent('0');
 });
 
 deleteNum.addEventListener('click', () => {
-    console.log(isNewNum, secondNum, isEquals);
     if (secondNum === false && isEquals === false) {
             currDisplay.textContent = currDisplay.textContent.substring(0, currDisplay.textContent.length - 1);
     }
