@@ -47,8 +47,9 @@ function clearContent(str) {
     isEquals = false;
     isNewNum = false;
     prevDisplayVal = '';
-    num1 = 0;
-    num2 = 0;
+    currOperation = '';
+    num1 = null;
+    num2 = null;
     currDisplay.textContent = '0';
     prevDisplay.textContent = '';
     window.alert(str);
@@ -103,9 +104,6 @@ operators.forEach(op => op.addEventListener('click', () => {
         isNewNum = false;
     }
     num1 = parseFloat(currDisplay.textContent);
-    if (num2 === 0 && currOperation === 'division'){
-        clearContent(`silly billy you can't divide by 0`);
-    }
     currOperation = op.value;
     prevDisplay.innerHTML = num1 + setOperation(currOperation);
     secondNum = true;
@@ -115,6 +113,7 @@ operators.forEach(op => op.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     if (isEquals === false && currOperation !== '') {
+        console.log('trying something');
         num2 = parseFloat(currDisplay.textContent);
         currDisplay.textContent = operate(num1, num2, currOperation);
         prevDisplay.innerHTML = num1 + setOperation(currOperation) + num2 + ' = ';
@@ -129,8 +128,9 @@ clear.addEventListener('click', () => {
     isEquals = false;
     isNewNum = false;
     prevDisplayVal = '';
-    num1 = 0;
-    num2 = 0;
+    currOperation = '';
+    num1 = null;
+    num2 = null;
     currDisplay.textContent = '0';
     prevDisplay.textContent = '';
 });
