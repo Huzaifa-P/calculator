@@ -22,6 +22,7 @@ let prevOperation = '';
 let secondNum = false;
 let isNewNum = false;
 let isEquals = false;
+let isZero = false;
 
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -52,6 +53,7 @@ function clearContent(str) {
     num2 = null;
     currDisplay.textContent = '0';
     prevDisplay.textContent = '';
+    isZero = true;
     window.alert(str);
 }
 
@@ -59,6 +61,7 @@ function division(n1, n2) {
     console.log(n1, n2)
     if (n2 === 0) {
         clearContent(`silly billy you can't divide by 0`);
+        return 0;
     }
     else {
         let ans = n1 / n2;
@@ -82,7 +85,7 @@ numbers.forEach(num => num.addEventListener('click', () => {
         currDisplay.textContent = '';
         secondNum = false;
     }
-    if ((currDisplay.textContent === '0' || currDisplay.textContent === `silly billy you can't divide by 0` || currDisplay.textContent === `please use operator`) && num.value != '.') {
+    if ((currDisplay.textContent === '0' || currDisplay.textContent === `silly billy you can't divide by 0`) && num.value != '.') {
         currDisplay.textContent = '';
     }
     if (currDisplay.textContent.length < 13 && num.value != '.') {
@@ -105,22 +108,29 @@ operators.forEach(op => op.addEventListener('click', () => {
     }
     num1 = parseFloat(currDisplay.textContent);
     currOperation = op.value;
-    prevDisplay.innerHTML = num1 + setOperation(currOperation);
+    if (isZero === false) {
+        prevDisplay.innerHTML = num1 + setOperation(currOperation);
+    }
     secondNum = true;
     isNewNum = true;
     isEquals = false;
+    isZero = false;
 }));
 
 equals.addEventListener('click', () => {
     if (isEquals === false && currOperation !== '') {
         console.log('trying something');
         num2 = parseFloat(currDisplay.textContent);
-        currDisplay.textContent = operate(num1, num2, currOperation);
-        prevDisplay.innerHTML = num1 + setOperation(currOperation) + num2 + ' = ';
         num1 = operate(num1, num2, currOperation);
-        isEquals = true;
-        isNewNum = false;
+        currDisplay.textContent = num1;
+        if (isZero === false) {
+            prevDisplay.innerHTML = num1 + setOperation(currOperation) + num2 + ' = ';
+            num1 = operate(num1, num2, currOperation);          
+            isEquals = true;
+            isNewNum = false;
+        }
     }
+    isZero = false;
 });
 
 clear.addEventListener('click', () => {
